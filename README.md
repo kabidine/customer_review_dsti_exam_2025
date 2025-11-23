@@ -176,6 +176,16 @@ curl -X POST "http://localhost:8000/predict" \
 - **Matplotlib, Seaborn** - Data visualization
 - **Datasets** - Loading and managing datasets from Hugging Face
 
-## Author
+## Team
+
+This project was developed by the following team members:
+
+- **kawtar abidine** (DS - Data Scientist)
+- **Nathalie Gálvez** (DS - Data Scientist)
+- **HADJ SEYD Nazim Akram** (DS - Data Scientist)
+- **Mohammed Ben slika** (DS - Data Scientist)
+- **Yamina BAIT** (DE - Data Engineer)
+- **K.G.L.G.Dayananda** (DE - Data Engineer)
+
 
 Developed for the Deep Learning Project at DSTI (Data Science Tech Institute) - Exam 2025
