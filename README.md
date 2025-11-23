@@ -180,7 +180,7 @@ curl -X POST "http://localhost:8000/predict" \
 
 This project was developed by the following team members:
 
-- **kawtar abidine** (DS - Data Scientist)
+- **kawtar abidine** (DS - Data Scientist) **team leader**
 - **Nathalie Gálvez** (DS - Data Scientist)
 - **HADJ SEYD Nazim Akram** (DS - Data Scientist)
 - **Mohammed Ben slika** (DS - Data Scientist)
