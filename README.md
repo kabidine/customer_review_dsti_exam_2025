@@ -78,11 +78,11 @@ jupyter notebook project.ipynb
 
 Run all cells sequentially to:
 - Load and preprocess the IMDB dataset
-- Fine-tune the DistilBERT model (takes ~30-60 minutes on CPU)
+- Fine-tune the DistilBERT model (takes 2.5 hours on CPU)
 - Evaluate model performance with metrics and visualizations
 - Save the trained model locally
 
-**Training Time**: Approximately 30-60 minutes on CPU for 2 epochs with 4,500 training samples.
+**Training Time**: Approximately 2.5 hours on CPU for 2 epochs with 4,500 training samples.
 
 ## Model Details
 
