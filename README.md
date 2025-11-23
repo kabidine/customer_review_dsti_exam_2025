@@ -82,7 +82,7 @@ Run all cells sequentially to:
 - Evaluate model performance with metrics and visualizations
 - Save the trained model locally
 
-**Training Time**: Approximately 30-60 minutes on CPU for 2 epochs with 4,050 training samples.
+**Training Time**: Approximately 30-60 minutes on CPU for 2 epochs with 4,500 training samples.
 
 ## Model Details
 
@@ -90,7 +90,7 @@ Run all cells sequentially to:
 - **Task**: Binary classification (Positive/Negative)
 - **Max Sequence Length**: 256 tokens (optimized for CPU)
 - **Dataset**: IMDB movie reviews from Hugging Face
-- **Training Samples**: 4,050 (2,250 positive + 2,250 negative)
+- **Training Samples**: 4,500 (2,250 positive + 2,250 negative)
 - **Validation Samples**: 450 (10% split from training)
 - **Test Samples**: 2,500 (1,250 positive + 1,250 negative)
 - **Epochs**: 2
