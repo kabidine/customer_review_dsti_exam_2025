@@ -11,7 +11,7 @@ from pydantic import BaseModel
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 app=FastAPI(title="Movie Reviews Sentiment Analysis API", version="1.0")
-#We initialize the saved fine-tuned model
+#We load the saved fine-tuned model from the dedicated HuggingFace repository
 model_path ="akramxhs/distillbert_movie_reviews_sentiment"
 print("Our fine-tuned model is getting loaded from our huggingface repo")
 tokenizer =AutoTokenizer.from_pretrained(model_path)
@@ -30,12 +30,12 @@ def read_root():
 @app.post("/predict", response_model=SentimentResponse)
 async def predict_sentiment(request: TextRequest):
     try:
-        encoding=tokenizer(request.text,truncation=True,padding="max_length",max_length=256,return_tensors="pt")
+        encoding=tokenizer(request.text,truncation=True,padding="max_length",max_length=256,return_tensors="pt") #we encode the text typed by the user to a max length of 256 tokens
         input_ids=encoding["input_ids"].to(device)
         attention_mask=encoding["attention_mask"].to(device)
         with torch.no_grad():
             outputs =model(input_ids=input_ids, attention_mask=attention_mask)
-            probabilities =torch.softmax(outputs.logits,dim=1)
+            probabilities =torch.softmax(outputs.logits,dim=1) #We convert the logits to probs using softmax
             confidence, prediction =torch.max(probabilities,dim=1)
         sentiment = "Positive" if prediction.item()==1 else "Negative"
         return SentimentResponse(sentiment=sentiment,confidence=confidence.item(),text_preview=request.text)
@@ -63,8 +63,8 @@ if st.button("Analyze the Sentiment"):
             response = requests.post(
                 API_URL,
                 json={"text": review_text})
-            if response.status_code == 200:
-                result = response.json()
+            if response.status_code == 200: 
+                result = response.json() #if the POST request gets no errors, we store the results in a JSON
                 col1, col2 = st.columns(2)
                 with col1:
                     st.subheader("Result")
@@ -85,13 +85,13 @@ st.markdown("The app was built using a fine-tuned DistilBERT, FastAPI, and Strea
     
     with open('streamlit_app.py','w', encoding='utf-8') as f:
         f.write(streamlit_code)
-
+#function to run the fastapi 
 def fastapi():
     try:
         subprocess.run([sys.executable, "-m", "uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "8000"])
     except subprocess.CalledProcessError:
         print("the FastAPI server stopped")
-
+#function to run the streamlit app
 def streamlit():
     print("please wait the Streamlit app is starting")
     webbrowser.open("http://localhost:8501")
@@ -106,14 +106,14 @@ def main():
 
     print("FastAPI: http://localhost:8000")
     print("Streamlit:http://localhost:8501")
-    fthread = threading.Thread(target=fastapi, daemon=True)
+    fthread = threading.Thread(target=fastapi, daemon=True) #We use threading
     sthread = threading.Thread(target=streamlit, daemon=True)
     fthread.start()
     sthread.start()
     try:
-        while fthread.is_alive() and sthread.is_alive():
+        while fthread.is_alive() and sthread.is_alive(): #the app keeps running as long as the threads are alive
             time.sleep(1)
-    except KeyboardInterrupt:
+    except KeyboardInterrupt: #We can interrupt the app with Control+C
         print("STOPPING")
 if __name__ == "__main__":
     main()
